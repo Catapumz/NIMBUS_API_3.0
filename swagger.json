@@ -3,7 +3,7 @@
   "info": {
     "version": "3.0.0",
     "title": "NIMBUS WALLS",
-    "description": "Documentacion para API con usuarios",
+    "description": "Documentation for API with users",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -14,16 +14,16 @@
   "tags": [
     {
       "name": "NIMBUS WALLS",
-      "description": "API para comunicar la app y la base de datos en la nube"
+      "description": "API"
     }
   ],
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/listar?quepared=25&dificultad=verde&isbloque=Travesía": {
+    "/routes?quepared=25&dificultad=verde&isbloque=Travesía": {
       "get": {
-        "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
+        "summary": "Returns the routes with the querys selected in the URL",
         "consumes": ["multipart/form-data"],
 
         "responses": {
@@ -52,15 +52,15 @@
         }
       }
     },
-    "/guardar": {
+    "/routes/save": {
       "post": {
-        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "summary": "Saves a route.",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Parámetros de body para guardar un nuevo itinerario, son todos requeridos.",
+            "description": "Body parameters for save a route. They all are required",
             "required": true,
             "schema": {
               "type": "object",
@@ -164,15 +164,15 @@
         }
       }
     },
-    "/editar/id": {
+    "/routes/id": {
       "put": {
-        "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
+        "summary": "Edits a route",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "El id del itinerario a modificar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. En el body van los elements a modificar unicamente, aunque en el ejemplo estén todos.",
+            "description": "The id of the route to modify is passed by url, for example, if the id is 5783 the request would be /editar/5783. In the body are only the elements to be modified, although in the example they are all.",
             "required": true,
             "schema": {
               "type": "object",
@@ -240,15 +240,13 @@
             }
           }
         }
-      }
-    },
-    "/borrar/id": {
+      },
       "delete": {
-        "summary": "Ejemplo de solicitud DELETE para eliminar un articulo",
+        "summary": "Deletes a route",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
-            "description": "El id del itinerario a eliminar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783."
+            "description": "The id of the route to delete is passed by url, for example, if the id is 5783 the request would be /editar/5783."
           }
         ],
         "responses": {
@@ -286,9 +284,9 @@
         }
       }
     },
-    "/buscar?buscar=aquitextoabuscar&quepared=25": {
+    "/routes?buscar=aquitextoabuscar&quepared=25": {
       "get": {
-        "summary": "Ejemplo de solicitud GET para hacer una búsqueda",
+        "summary": "Makes a search",
         "consumes": ["multipart/form-data"],
         "responses": {
           "200": {
@@ -326,15 +324,15 @@
         }
       }
     },
-    "/user/register": {
+    "/users/register": {
       "post": {
-        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "summary": "Registers a user",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Parámetros de body para registrar un usuario, son todos requeridos.",
+            "description": "Body parameters to register a user, they are all required",
             "required": true,
             "schema": {
               "type": "object",
@@ -396,15 +394,15 @@
         }
       }
     },
-    "/user/login": {
+    "/users/login": {
       "post": {
-        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "summary": "Makes a login and returns needed data.",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Parámetros de body para iniciar una sesion con un usuario, son todos requeridos.",
+            "description": "Body parameters to login a user, they are all required.",
             "required": true,
             "schema": {
               "type": "object",
@@ -455,13 +453,13 @@
         }
       }
     },
-    "/user/borrar/id": {
+    "/users/id": {
       "delete": {
-        "summary": "Ejemplo de solicitud DELETE para eliminar un usuario",
+        "summary": "Deletes a user",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
-            "description": "El id del usuario a eliminar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. Solo puede eliminar role: role_admin"
+            "description": "The id of the user to delete is passed by url, for example, if the id is 5783 the request would be /edit/5783. You can only delete role: role_admin"
           }
         ],
         "responses": {
@@ -493,11 +491,9 @@
             }
           }
         }
-      }
-    },
-    "/user/edit/id": {
+      },
       "put": {
-        "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
+        "summary": "Edits a user. Only user itself or admin",
         "consumes": ["multipart/form-data"],
         "parameters": [
           {
@@ -567,9 +563,9 @@
         }
       }
     },
-    "/user/getAllUsers": {
+    "/users/": {
       "get": {
-        "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
+        "summary": "Returns all users",
         "consumes": ["multipart/form-data"],
 
         "responses": {
@@ -629,9 +625,9 @@
         }
       }
     },
-    "/user/find/textoabuscar": {
+    "/users/textoabuscar": {
       "get": {
-        "summary": "Ejemplo de solicitud GET para hacer una búsqueda en los campos name, nick y email",
+        "summary": "Search with the selected querys",
         "consumes": ["multipart/form-data"],
         "responses": {
           "200": {
@@ -663,12 +659,12 @@
         }
       }
     },
-    "/rate/routeId/rate(1-5)": {
+    "/rate/id/rate(1-5)": {
       "get": {
-        "summary": "Ejemplo de solicitud GET",
+        "summary": "Rates a route.",
         "consumes": ["multipart/form-data"],
         "Description": [
-          "En rate(1-5) simplemente hay que pasarle la puntuación que se le da a la vía"
+          "Id is for the route you want to rate. Rate(1-5) is a number between 1-5."
         ],
 
         "responses": {
@@ -710,91 +706,6 @@
                 "mensaje": "Este usuario ya ha rateado la via"
               }
             }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Via": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "autor": {
-          "type": "string"
-        },
-        "dificultad": {
-          "type": "integer"
-        },
-        "comentario": {
-          "type": "string"
-        },
-        "presas": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "quepared": {
-          "type": "integer",
-          "enum": [15, 25]
-        },
-        "isbloque": {
-          "type": "string",
-          "enum": ["bloque", "travesia"]
-        }
-      },
-      "required": [
-        "name",
-        "autor",
-        "dificultad",
-        "presas",
-        "quepared",
-        "isbloque"
-      ]
-    },
-
-    "Listado itinerarios": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": [
-          "name",
-          "autor",
-          "dificultad",
-          "comentario",
-          "presas",
-          "quepared",
-          "isbloque"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "autor": {
-            "type": "string"
-          },
-          "dificultad": {
-            "type": "integer"
-          },
-          "comentario": {
-            "type": "string"
-          },
-          "presas": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "quepared": {
-            "type": "integer",
-            "enum": [15, 25]
-          },
-          "isbloque": {
-            "type": "string",
-            "enum": ["bloque", "travesia"]
           }
         }
       }

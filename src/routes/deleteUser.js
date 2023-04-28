@@ -4,6 +4,6 @@ const auth = require("../middlewares/auth");
 
 const { borrar } = require("../controllers/deleteUser");
 
-router.delete("/user/borrar/:id?", auth.auth, borrar);
+router.delete("users/:id", auth.auth, borrar);
 
 module.exports = router;

@@ -5,6 +5,6 @@ const auth = require("../middlewares/auth");
 const { crear } = require("../controllers/guardar");
 
 // Rutas de pruebas
-router.post("/guardar", auth.auth, crear);
+router.post("/routes", auth.auth, crear);
 
 module.exports = router;

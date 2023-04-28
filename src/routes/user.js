@@ -4,7 +4,7 @@ const { pruebaUser, register, login } = require("../controllers/user");
 const auth = require("../middlewares/auth");
 
 router.get("/user", auth.auth, pruebaUser);
-router.post("/user/register", register);
-router.post("/user/login", login);
+router.post("/users/register", register);
+router.post("/users/login", login);
 
 module.exports = router;

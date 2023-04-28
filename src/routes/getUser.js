@@ -4,6 +4,6 @@ const auth = require("../middlewares/auth");
 
 const { consulta } = require("../controllers/getUser");
 
-router.put("/user/getUser/:id", auth.auth, consulta);
+router.put("/users/:id", auth.auth, consulta);
 
 module.exports = router;

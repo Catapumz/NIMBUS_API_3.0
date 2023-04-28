@@ -4,6 +4,6 @@ const auth = require("../middlewares/auth");
 
 const { editar } = require("../controllers/editUser");
 
-router.put("/user/edit/:id", auth.auth, editar);
+router.put("/users/:id", auth.auth, editar);
 
 module.exports = router;

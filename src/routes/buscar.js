@@ -4,6 +4,6 @@ const auth = require("../middlewares/auth");
 
 const { consulta } = require("../controllers/buscar");
 
-router.get("/buscar", auth.auth, consulta);
+router.get("/routes", auth.auth, consulta);
 
 module.exports = router;

@@ -5,6 +5,6 @@ const auth = require("../middlewares/auth");
 const { consulta } = require("../controllers/listar");
 
 // Rutas de pruebas
-router.get("/listar", auth.auth, consulta);
+router.get("/routes", auth.auth, consulta);
 
 module.exports = router;
