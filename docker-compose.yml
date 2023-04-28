@@ -5,6 +5,7 @@ services:
       context: .
     ports:
       - "3000:3000"
+      - "8443:443"
     command: npm run start
     env_file:
     - .env
