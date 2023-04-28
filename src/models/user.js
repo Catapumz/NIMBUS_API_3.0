@@ -20,9 +20,11 @@ const UserSchema = Schema({
   },
   sent_routes: {
     type: [String],
+    default: [],
   },
   created_routes: {
     type: [String],
+    default: [],
   },
   role: {
     type: String,

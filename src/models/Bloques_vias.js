@@ -54,6 +54,7 @@ const Via15Schema = Schema({
   },
   rated_by: {
     type: [String],
+    default: [],
   },
 });
 
