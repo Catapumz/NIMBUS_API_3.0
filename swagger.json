@@ -1,0 +1,803 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "NIMBUS WALLS",
+    "description": "Documentacion para API con usuarios",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "35.180.113.93:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "NIMBUS WALLS",
+      "description": "API para comunicar la app y la base de datos en la nube"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/listar?quepared=25&dificultad=verde&isbloque=Travesía": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Listado itinerarios"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "name": "Mi via",
+                  "autor": "Juanito",
+                  "dificultad": 7,
+                  "comentario": "Una via guapisima",
+                  "presas": ["A", "B", "C"],
+                  "quepared": 15,
+                  "isbloque": "bloque"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/guardar": {
+      "post": {
+        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para guardar un nuevo itinerario, son todos requeridos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "autor": {
+                  "type": "string"
+                },
+                "dificultad": {
+                  "type": "integer"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "presas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "quepared": {
+                  "type": "integer",
+                  "enum": [15, 25]
+                },
+                "isbloque": {
+                  "type": "string",
+                  "enum": ["bloque", "travesia"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "name": "trave",
+                  "autor": "killua",
+                  "comentario": "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ",
+                  "presas": ["23"],
+                  "created_by": "64442ee06f85bb80a54207ab",
+                  "quepared": 15,
+                  "isbloque": "travesia",
+                  "created_at": "2023-04-26T13:00:26.168Z",
+                  "edited_at": "2023-04-26T13:00:26.168Z",
+                  "rated_times": 0,
+                  "rating_points": 0,
+                  "rating": 0,
+                  "rated_by": [],
+                  "_id": "6449206a02a5e45fdc2ddca6",
+                  "__v": 0
+                },
+                "mensaje": "Itinerario creado con exito",
+                "useractualizado": {
+                  "_id": "64442ee06f85bb80a54207ab",
+                  "name": "esau sorianuu",
+                  "nick": "esau",
+                  "email": "esau@gmail.com",
+                  "password": "$2b$10$aLhzggvo5h9zmzYLr6pt6.PXd/OSb.MywHqXWYyk1U7XFSv2ZTV9K",
+                  "sent_routes": [],
+                  "created_routes": [
+                    "644907e797095c7f3a87dd9e",
+                    "64490964846830bed971ff07",
+                    "6449097d1679bda7013a92b2",
+                    "644909811679bda7013a92b6",
+                    "644909811679bda7013a92ba",
+                    "644909821679bda7013a92be",
+                    "64491228d8eb425ed0308c7a"
+                  ],
+                  "role": "role_user",
+                  "image": "default.png",
+                  "created_at": "2023-04-22T19:00:48.712Z",
+                  "__v": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "securityDefinitions": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header",
+          "description": "Token JWT de sesión"
+        }
+      }
+    },
+    "/editar/id": {
+      "put": {
+        "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "El id del itinerario a modificar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. En el body van los elements a modificar unicamente, aunque en el ejemplo estén todos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "autor": {
+                  "type": "string"
+                },
+                "dificultad": {
+                  "type": "integer"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "presas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "quepared": {
+                  "type": "integer",
+                  "enum": [15, 25]
+                },
+                "isbloque": {
+                  "type": "string",
+                  "enum": ["bloque", "travesia"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "_id": "6449206a02a5e45fdc2ddca6",
+                  "name": "trave",
+                  "autor": "killua",
+                  "comentario": "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ",
+                  "presas": ["23"],
+                  "created_by": "64442ee06f85bb80a54207ab",
+                  "quepared": 15,
+                  "isbloque": "travesia",
+                  "created_at": "2023-04-26T13:00:26.168Z",
+                  "edited_at": "2023-04-27T10:14:16.620Z",
+                  "rated_times": 0,
+                  "rating_points": 0,
+                  "rating": 0,
+                  "rated_by": [],
+                  "__v": 0
+                },
+                "mensaje": "Itinerario actualizado con exito"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/borrar/id": {
+      "delete": {
+        "summary": "Ejemplo de solicitud DELETE para eliminar un articulo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "description": "El id del itinerario a eliminar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "Mensaje": "Itinerario eliminado con éxito",
+                "articuloBorrado": {
+                  "_id": "6449206a02a5e45fdc2ddca6",
+                  "name": "trave",
+                  "autor": "killua",
+                  "comentario": "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ",
+                  "presas": ["23"],
+                  "created_by": "64442ee06f85bb80a54207ab",
+                  "quepared": 15,
+                  "isbloque": "travesia",
+                  "created_at": "2023-04-26T13:00:26.168Z",
+                  "edited_at": "2023-04-27T10:14:16.620Z",
+                  "rated_times": 0,
+                  "rating_points": 0,
+                  "rating": 0,
+                  "rated_by": [],
+                  "__v": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar?buscar=aquitextoabuscar&quepared=25": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET para hacer una búsqueda",
+        "consumes": ["multipart/form-data"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Listado itinerarios"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "status": "Éxito, aquí están los resultados de tu búsqueda",
+                "vias": [
+                  {
+                    "rated_times": 0,
+                    "rating_points": 0,
+                    "rating": 0,
+                    "rated_by": [],
+                    "_id": "63e6bb2eb5a8ba64bd19d341",
+                    "name": "cataccion de alba",
+                    "autor": "",
+                    "dificultad": null,
+                    "comentario": "Se puede hacer en ambos sentidos, aunque originalmente está pensada para hacerla de derecha a izquierda\n\n La salida y el top son de color blanco ",
+                    "presas": [""],
+                    "created_by": "64442ee06f85bb80a54207ab",
+                    "edited_at": "2023-04-26T08:52:42.556Z",
+                    "isbloque": "trave",
+                    "quepared": 15
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/register": {
+      "post": {
+        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para registrar un usuario, son todos requeridos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nick": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            },
+            "examples": {
+              "application/json": {
+                "mesage": "Accion de registro de usuarios",
+                "userStored": {
+                  "name": "niko batovs",
+                  "nick": "niko",
+                  "email": "niko@gmail.com",
+                  "password": "$2b$10$viQWMvrhHV.9WfCPVQ4tuulg5Ek49DPLDuP9eJjVxu/u/zNi7I5Xq",
+                  "sent_routes": [],
+                  "created_routes": [],
+                  "role": "role_user",
+                  "image": "default.png",
+                  "_id": "644a4e7a6326be97741f418f",
+                  "created_at": "2023-04-27T10:29:14.892Z",
+                  "__v": 0
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "securityDefinitions": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header",
+          "description": "Token JWT de sesión"
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Ejemplo de solicitud POST con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Parámetros de body para iniciar una sesion con un usuario, son todos requeridos.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            },
+            "examples": {
+              "application/json": {
+                "status": "success",
+                "message": "Accion de login",
+                "user": {
+                  "user": "64442ee06f85bb80a54207ab",
+                  "nick": "esau",
+                  "email": "esau@gmail.com",
+                  "role": "role_user"
+                },
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY0NDQyZWUwNmY4NWJiODBhNTQyMDdhYiIsIm5hbWUiOiJlc2F1IHNvcmlhbnV1IiwibmljayI6ImVzYXUiLCJlbWFpbCI6ImVzYXVAZ21haWwuY29tIiwicm9sZSI6InJvbGVfdXNlciIsImltYWdlbiI6ImRlZmF1bHQucG5nIiwiY3JlYXRlZF9yb3V0ZXMiOlsiNjQ0OTA3ZTc5NzA5NWM3ZjNhODdkZDllIiwiNjQ0OTA5NjQ4NDY4MzBiZWQ5NzFmZjA3IiwiNjQ0OTA5N2QxNjc5YmRhNzAxM2E5MmIyIiwiNjQ0OTA5ODExNjc5YmRhNzAxM2E5MmI2IiwiNjQ0OTA5ODExNjc5YmRhNzAxM2E5MmJhIiwiNjQ0OTA5ODIxNjc5YmRhNzAxM2E5MmJlIiwiNjQ0OTEyMjhkOGViNDI1ZWQwMzA4YzdhIiwiNjQ0OTIwNmEwMmE1ZTQ1ZmRjMmRkY2E2Il0sImlhdCI6MTY4MjU5MTE3MSwiZXhwIjoxNjg1MTgzMTcxfQ.sTrpOVMPXmogJG9ziTx3s96tkjaENiDWttJJd4__F4M"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "securityDefinitions": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header",
+          "description": "Token JWT de sesión"
+        }
+      }
+    },
+    "/user/borrar/id": {
+      "delete": {
+        "summary": "Ejemplo de solicitud DELETE para eliminar un usuario",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "description": "El id del usuario a eliminar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. Solo puede eliminar role: role_admin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "Mensaje": "Usuario eliminado con éxito",
+                "userBorrado": {
+                  "_id": "644a4e7a6326be97741f418f",
+                  "name": "niko batovs",
+                  "nick": "niko",
+                  "email": "niko@gmail.com",
+                  "password": "$2b$10$viQWMvrhHV.9WfCPVQ4tuulg5Ek49DPLDuP9eJjVxu/u/zNi7I5Xq",
+                  "sent_routes": [],
+                  "created_routes": [],
+                  "role": "role_user",
+                  "image": "default.png",
+                  "created_at": "2023-04-27T10:29:14.892Z",
+                  "__v": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/edit/id": {
+      "put": {
+        "summary": "Ejemplo de solicitud PUT con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "El id del usuario a modificar se pasa por url, por ejemplo, si el id es 5783 la petición sería /editar/5783. En el body van los elements a modificar unicamente, aunque en el ejemplo estén todos. Solo se le permite modificar al mismo usuario y al administrador.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "nick": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Via"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "_id": "64442ee06f85bb80a54207ab",
+                  "name": "esau sorianuu",
+                  "nick": "esau",
+                  "email": "esau@gmail.com",
+                  "password": "$2b$10$aLhzggvo5h9zmzYLr6pt6.PXd/OSb.MywHqXWYyk1U7XFSv2ZTV9K",
+                  "sent_routes": [],
+                  "created_routes": [
+                    "644907e797095c7f3a87dd9e",
+                    "64490964846830bed971ff07",
+                    "6449097d1679bda7013a92b2",
+                    "644909811679bda7013a92b6",
+                    "644909811679bda7013a92ba",
+                    "644909821679bda7013a92be",
+                    "64491228d8eb425ed0308c7a",
+                    "6449206a02a5e45fdc2ddca6"
+                  ],
+                  "role": "role_user",
+                  "image": "default.png",
+                  "created_at": "2023-04-22T19:00:48.712Z",
+                  "__v": 0
+                },
+                "mensaje": "Usuario actualizado con exito"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getAllUsers": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET con parámetros en el cuerpo",
+        "consumes": ["multipart/form-data"],
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array"
+            },
+            "examples": {
+              "application/json": {
+                "users": [
+                  {
+                    "id": "643e7b7cfa587004326190ac",
+                    "name": "carlos",
+                    "user_role": "role_user",
+                    "nick": "catapum_z",
+                    "email": "carloscataronda@gmail.com",
+                    "created_routes": ["63e6bb2eb5a8ba64bd19d33e"]
+                  },
+                  {
+                    "id": "643e8467445bd895cf03875c",
+                    "name": "hector",
+                    "user_role": "role_user",
+                    "nick": "hector",
+                    "email": "hector@gmail.com",
+                    "created_routes": []
+                  },
+                  {
+                    "id": "64442ee06f85bb80a54207ab",
+                    "name": "esau sorianuu",
+                    "user_role": "role_user",
+                    "nick": "esau",
+                    "email": "esau@gmail.com",
+                    "created_routes": [
+                      "644907e797095c7f3a87dd9e",
+                      "64490964846830bed971ff07",
+                      "6449097d1679bda7013a92b2",
+                      "644909811679bda7013a92b6",
+                      "644909811679bda7013a92ba",
+                      "644909821679bda7013a92be",
+                      "64491228d8eb425ed0308c7a",
+                      "6449206a02a5e45fdc2ddca6"
+                    ]
+                  },
+                  {
+                    "id": "6448dd3e8143e7356071e990",
+                    "name": "ares orient",
+                    "user_role": "role_admin",
+                    "nick": "ares",
+                    "email": "ares@gmail.com",
+                    "created_routes": []
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/find/textoabuscar": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET para hacer una búsqueda en los campos name, nick y email",
+        "consumes": ["multipart/form-data"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array"
+            },
+            "examples": {
+              "application/json": {
+                "status": "Éxito, aquí están los resultados de tu búsqueda",
+                "vias": [
+                  {
+                    "_id": "643e8467445bd895cf03875c",
+                    "name": "hector",
+                    "nick": "hector",
+                    "email": "hector@gmail.com",
+                    "password": "$2b$10$0i3Oge0THhCqY.KPInkst.6PtdLHWXWB8pY2kuZrvXo7H.F8eRQ0K",
+                    "sent_routes": [],
+                    "created_routes": [],
+                    "role": "role_user",
+                    "image": "default.png",
+                    "created_at": "2023-04-18T11:52:07.710Z",
+                    "__v": 0
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rate/routeId/rate(1-5)": {
+      "get": {
+        "summary": "Ejemplo de solicitud GET",
+        "consumes": ["multipart/form-data"],
+        "Description": [
+          "En rate(1-5) simplemente hay que pasarle la puntuación que se le da a la vía"
+        ],
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array"
+            },
+            "examples": {
+              "application/json": {
+                "itinerario": {
+                  "_id": "644904a12ad149b19dd1c40f",
+                  "name": "killua soliko",
+                  "autor": "killua",
+                  "comentario": "Todas nuestras vías siguen el método T.R.A.V.E (Tocas Rojas, Azules, Verdes y Encadenas) \n\n La salida y el top son de color blanco \n\n las amarillas se pueden usar para juntar \n\n Si con esos tres colores no es suficiente, el metodo T-R-A-V-E se puede alargar con el color morado ",
+                  "presas": ["23"],
+                  "created_by": "64442ee06f85bb80a54207ab",
+                  "quepared": 15,
+                  "isbloque": "trave",
+                  "created_at": "2023-04-26T11:01:53.729Z",
+                  "edited_at": "2023-04-26T11:01:53.729Z",
+                  "rated_by": ["643e8467445bd895cf03875c"],
+                  "__v": 0,
+                  "rated_times": 1,
+                  "rating": 5,
+                  "rating_points": 5
+                },
+                "mensaje": "Itinerario rateado con exito"
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "schema": {
+              "type": "array"
+            },
+            "examples": {
+              "application/json": {
+                "mensaje": "Este usuario ya ha rateado la via"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Via": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "autor": {
+          "type": "string"
+        },
+        "dificultad": {
+          "type": "integer"
+        },
+        "comentario": {
+          "type": "string"
+        },
+        "presas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quepared": {
+          "type": "integer",
+          "enum": [15, 25]
+        },
+        "isbloque": {
+          "type": "string",
+          "enum": ["bloque", "travesia"]
+        }
+      },
+      "required": [
+        "name",
+        "autor",
+        "dificultad",
+        "presas",
+        "quepared",
+        "isbloque"
+      ]
+    },
+
+    "Listado itinerarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "autor",
+          "dificultad",
+          "comentario",
+          "presas",
+          "quepared",
+          "isbloque"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "autor": {
+            "type": "string"
+          },
+          "dificultad": {
+            "type": "integer"
+          },
+          "comentario": {
+            "type": "string"
+          },
+          "presas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "quepared": {
+            "type": "integer",
+            "enum": [15, 25]
+          },
+          "isbloque": {
+            "type": "string",
+            "enum": ["bloque", "travesia"]
+          }
+        }
+      }
+    }
+  }
+}
