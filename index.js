@@ -3,11 +3,11 @@ const { conexion } = require("./src/conexion"); //importamos función conexion d
 const { app } = require("./src/app");
 const fs = require("fs");
 const https = require("https");
-//const privateKey = fs.readFileSync("./server.key", "utf8");
-//const certificate = fs.readFileSync("./server.crt", "utf8");
+const privateKey = fs.readFileSync("./server.key", "utf8");
+const certificate = fs.readFileSync("./server.crt", "utf8");
 
-//const credentials = { key: privateKey, cert: certificate };
-//const httpsServer = https.createServer(credentials, app);
+const credentials = { key: privateKey, cert: certificate };
+const httpsServer = https.createServer(credentials, app);
 
 const PORT = 3000;
 
@@ -21,9 +21,9 @@ async function main() {
     console.log("Servidor HTTP corriendo en el puerto " + PORT)
   );
 
-  //httpsServer.listen(8443, () =>
-  // console.log("Servidor HTTPS corriendo en el puerto 8443 ")
-  //);
+  httpsServer.listen(8443, () =>
+    console.log("Servidor HTTPS corriendo en el puerto 8443 ")
+  );
 }
 
 main();
