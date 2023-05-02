@@ -1,24 +1,28 @@
-const user = require("../models/user");
+const users = require("../models/user");
+const bloques_vias = require("../models/Bloques_vias");
 
 const consulta = async (req, res) => {
   const userId = req.user.id;
-  const result = await user.findById(userId);
+  const result = await users.findById(userId);
   const user = [];
 
-  for (const user of result) {
-    const subuser = {
-      id: user.id,
-      name: user.name,
-      user_role: user.role,
-      nick: user.nick,
-      email: user.email,
-      created_routes: user.created_routes,
-    };
-    user.push(subuser);
-  }
+  const subuser = {
+    id: result.id,
+    name: result.name,
+    user_role: result.role,
+    nick: result.nick,
+    email: result.email,
+    created_routes: result.created_routes,
+  };
+  user.push(subuser);
+
+  const created_routes = await bloques_vias.find({
+    created_by: result.id,
+  });
 
   return res.status(200).json({
-    users: user,
+    user: user,
+    created_routes: created_routes,
   });
 };
 
